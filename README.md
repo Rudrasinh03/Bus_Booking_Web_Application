@@ -10,3 +10,10 @@ Key Features
 - Book and cancel tickets   
 - Database integration using Entity Framework Core  
 - Responsive Razor views with Bootstrap styling 
+
+Technologies Used
+- .NET 9 MVC
+- C#
+- Entity Framework Core
+- SQLite Database(busapp.db)
+- Bootstrap 5 for UI

@@ -1,0 +1,187 @@
+/* 🌐 General Styling */
+body {
+    font-family: 'Segoe UI', Roboto, Arial, Helvetica, sans-serif;
+    background: linear-gradient(180deg, #e3f2fd, #f8f9fa);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* 🧭 Navbar */
+.navbar {
+    background: linear-gradient(90deg, #007bff, #00b4d8);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand {
+    font-weight: bold;
+    color: #fff !important;
+    letter-spacing: 0.5px;
+}
+.nav-link {
+    color: #f8f9fa !important;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: #ffe57f !important;
+}
+
+/* ✨ Headings */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    background: linear-gradient(90deg, #007bff, #00b4d8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+/* 🧩 Card Container (used in Login/Register) */
+.card {
+    border: none;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+.card-body {
+    padding: 30px;
+}
+
+/* 🧾 Forms (Login, Register, etc.) */
+form {
+    margin-top: 15px;
+}
+.form-label {
+    font-weight: 600;
+    color: #444;
+}
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+/* 🎫 Buttons */
+.btn {
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+.btn-success {
+    background-color: #198754;
+    border: none;
+}
+.btn-success:hover {
+    background-color: #157347;
+    transform: translateY(-2px);
+}
+
+/* 📋 Tables */
+.table {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+.table th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.table tbody tr:hover {
+    background-color: #f1f9ff;
+    transition: background-color 0.2s ease;
+}
+
+/* 🚌 Tours & Bus Info Cards */
+.tour-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+.tour-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+.tour-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.tour-card .card-body {
+    padding: 20px;
+}
+.tour-card h5 {
+    color: #007bff;
+    font-weight: 600;
+}
+.tour-card p {
+    color: #555;
+}
+
+/* 💡 Alerts */
+.alert {
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+/* 🦶 Footer */
+footer {
+    padding: 20px 0;
+    background-color: #e9ecef;
+    color: #555;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.95rem;
+    border-top: 1px solid #ddd;
+}
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* 🌈 Utility */
+.shadow-hover:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* 🧍 Centered Form Container */
+.container {
+    max-width: 900px;
+}
+.container .row {
+    margin-top: 50px;
+}
+
+/* 🏞 Optional: Background Overlay for Auth Pages */
+.auth-bg {
+    background: linear-gradient(135deg, rgba(0,123,255,0.2), rgba(0,180,216,0.2));
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+}

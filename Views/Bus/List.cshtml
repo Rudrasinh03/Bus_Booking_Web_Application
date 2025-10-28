@@ -1,0 +1,79 @@
+@model IEnumerable<BusBookingWebApp.Models.Schedule>
+
+@{
+    ViewData["Title"] = "Available Trips";
+    string fromQuery = Context?.Request?.Query["from"].ToString() ?? "";
+    string toQuery = Context?.Request?.Query["to"].ToString() ?? "";
+}
+
+<div class="container my-5">
+    <div class="card shadow-lg border-0 p-4 rounded-4">
+        <h2 class="text-center mb-4 text-primary">
+            🚌 Available Trips
+        </h2>
+
+        <!-- 🔍 Search Form -->
+        <form method="get" class="row g-3 mb-4 justify-content-center">
+            <div class="col-md-4">
+                <input name="from" placeholder="From (e.g. Mumbai)" value="@fromQuery" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <input name="to" placeholder="To (e.g. Pune)" value="@toQuery" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    🔍 Search
+                </button>
+            </div>
+        </form>
+
+        <!-- 🧾 Trip Results -->
+        @if (Model == null || !Model.Any())
+        {
+            <div class="alert alert-danger text-center mt-4">
+                🚫 No trips found. Try searching “Mumbai” or “Pune”.
+            </div>
+        }
+        else
+        {
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th>BUS</th>
+                        <th>ROUTE</th>
+                        <th>FARE</th>
+                        <th>DURATION</th> <!-- ✅ Replaced SEATS -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model)
+                    {
+                        // Get route duration (e.g., 8.5 hours = 8 hrs 30 mins)
+                        var hours = s.Bus?.Route?.DurationHours ?? 0;
+                        var hrs = Math.Floor(hours);
+                        var mins = (hours - hrs) * 60;
+                        var durationText = hrs > 0 ? $"{hrs} hr{(hrs > 1 ? "s" : "")}" : "";
+                        if (mins > 0)
+                            durationText += (durationText != "" ? " " : "") + $"{mins:0} min";
+
+                        <tr class="shadow-hover">
+                            <td class="fw-bold">@s.Bus?.Name</td>
+                            <td>@(s.Bus?.Route?.From ?? "?") → @(s.Bus?.Route?.To ?? "?")</td>
+                            <td><strong>₹@s.Fare</strong></td>
+                            <td>@durationText</td> <!-- ✅ Show formatted duration -->
+                            <td>
+                                <a class="btn btn-success px-3"
+                                   asp-controller="Booking"
+                                   asp-action="Book"
+                                   asp-route-scheduleId="@s.Id">
+                                    Book Now
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

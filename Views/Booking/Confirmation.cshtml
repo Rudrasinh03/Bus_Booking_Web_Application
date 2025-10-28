@@ -1,0 +1,40 @@
+@model BusBookingWebApp.Models.Booking
+
+@{
+    ViewData["Title"] = "Booking Confirmation";
+
+    // calculate price safely
+    var farePerSeat = Model.Schedule?.Fare ?? 0;
+    var totalAmount = farePerSeat * Model.SeatsBooked;
+}
+
+<div class="container my-5">
+    <div class="card shadow-lg border-0 p-5 rounded-4 text-center">
+        <h2 class="text-primary">🎉 Booking Confirmed!</h2>
+        <p class="lead">Thank you, <strong>@Model.CustomerName</strong> — your journey is ready!</p>
+
+        <div class="mt-4 text-start d-inline-block">
+            <p><strong>🚌 Bus:</strong> @(Model.Schedule?.Bus?.Name ?? "N/A")</p>
+            <p><strong>📍 Route:</strong> @($"{Model.Schedule?.Bus?.Route?.From ?? "?"} → {Model.Schedule?.Bus?.Route?.To ?? "?"}")</p>
+            <p><strong>🗓️ Travel Date:</strong> @Model.TravelDate.ToString("dd MMM yyyy")</p>
+            <p><strong>⏰ Departure Time:</strong> @(Model.Schedule?.DepartureTime.ToString("hh:mm tt") ?? "N/A")</p>
+
+            <p><strong>💺 Seats Booked:</strong> @Model.SeatsBooked</p>
+            <p><strong>🔢 Seat Numbers:</strong> @(string.IsNullOrWhiteSpace(Model.SelectedSeatNumbers) ? "N/A" : Model.SelectedSeatNumbers)</p>
+
+            <hr />
+            <p><strong>💰 Fare per Seat:</strong> ₹@farePerSeat</p>
+            <p class="fs-5"><strong>🧾 Total Price:</strong> <span class="text-success">₹@totalAmount</span></p>
+            <hr />
+
+            <p><strong>🕒 Booking Time:</strong> @Model.BookingTime.ToString("dd MMM yyyy, hh:mm tt")</p>
+        </div>
+        <div class="mt-4">
+        <a href="/Booking/MyBookings" class="btn btn-primary me-2">View My Bookings</a>
+        <a href="/" class="btn btn-outline-secondary me-2">Back to Home</a>
+        <a asp-action="DownloadTicket" asp-route-bookingId="@Model.Id" class="btn btn-success">
+            📄 Download Ticket (PDF)
+        </a>
+        </div>
+    </div>
+</div>

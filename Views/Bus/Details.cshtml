@@ -1,0 +1,8 @@
+@model BusBookingWebApp.Models.Schedule
+<h2>Trip Details</h2>
+<p>Bus: @Model.Bus?.Name</p>
+<p>Route: @Model.Bus?.Route?.From -> @Model.Bus?.Route?.To</p>
+<p>Departure: @Model.DepartureTime.ToString("g")</p>
+<p>Arrival: @Model.ArrivalTime.ToString("g")</p>
+<p>Fare: @Model.Fare.ToString("C")</p>
+<a href="/Booking/Book?scheduleId=@Model.Id">Book Seats</a>

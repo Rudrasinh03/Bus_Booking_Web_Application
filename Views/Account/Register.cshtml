@@ -1,0 +1,39 @@
+@model BusBookingWebApp.Models.User
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-hover">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Create Your Account</h2>
+
+                    <form method="post" asp-action="Register">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input asp-for="UserName" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" type="email" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input asp-for="Password" class="form-control" type="password" required />
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">Register</button>
+                    </form>
+
+                    <p class="text-center mt-3">
+                        Already have an account? <a href="/Account/Login">Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

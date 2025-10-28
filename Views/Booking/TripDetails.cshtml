@@ -1,0 +1,13 @@
+@model BusBookingWebApp.Models.Schedule
+
+<h2>Trip Details</h2>
+
+<p><strong>Bus:</strong> @Model.Bus?.Name</p>
+<p><strong>Route:</strong> @Model.Bus?.Route?.From → @Model.Bus?.Route?.To</p>
+<p><strong>Departure:</strong> @Model.DepartureTime.ToString("g")</p>
+<p><strong>Arrival:</strong> @Model.ArrivalTime.ToString("g")</p>
+<p><strong>Fare:</strong> @Model.Fare.ToString("C")</p>
+
+<a class="btn btn-primary" asp-controller="Booking" asp-action="Book" asp-route-scheduleId="@Model.Id">
+    Book Seats
+</a>

@@ -1,0 +1,107 @@
+@model BusBookingWebApp.Models.Schedule
+
+@{
+    ViewData["Title"] = "Book Trip";
+    var totalSeats = (int)ViewBag.TotalSeats;
+    var bookedSeats = ViewBag.BookedSeats as List<int> ?? new();
+    var seatsPerRow = 4;
+    var chosenDateStr = ViewBag.TravelDate as string ?? Model.DepartureTime.ToString("yyyy-MM-dd");
+}
+
+<div class="container my-5">
+    <div class="card shadow-lg border-0 p-5 rounded-4">
+        <h2 class="text-center text-primary mb-4">🎟️ Book Your Trip</h2>
+
+        <div class="bg-light border rounded p-4 mb-4">
+            <p><strong>Bus:</strong> @Model.Bus?.Name</p>
+            <p><strong>Route:</strong> @Model.Bus?.Route?.From → @Model.Bus?.Route?.To</p>
+            <p><strong>Fare:</strong> ₹@Model.Fare</p>
+            <p><strong>Travel Date:</strong>
+                <input id="travelDate" name="travelDate" type="date" class="form-control d-inline-block"
+                       style="width:170px; margin-left:8px;"
+                       value="@chosenDateStr" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            </p>
+        </div>
+
+        <form asp-action="Book" method="post" id="bookingForm">
+            <input type="hidden" name="scheduleId" value="@Model.Id" />
+            <input type="hidden" id="selectedSeatsCsv" name="selectedSeatsCsv" />
+            <input type="hidden" id="formTravelDate" name="travelDate" value="@chosenDateStr" />
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Passenger Name:</label>
+                <input type="text" name="customerName" class="form-control" placeholder="Enter your full name" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Select Seat(s):</label>
+                <div class="seat-map mt-2">
+                    @for (int i = 1; i <= totalSeats; i++)
+                    {
+                        var isBooked = bookedSeats.Contains(i);
+                        var seatClass = isBooked ? "seat booked" : "seat available";
+                        <div class="@seatClass" data-seat="@i" title="Seat @i">@i</div>
+
+                        if (i % seatsPerRow == 0)
+                        {
+                            <div style="clear:both"></div>
+                        }
+                    }
+                </div>
+                <div class="mt-2 small text-muted">Click seats to toggle selection. Booked seats are greyed out.</div>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 py-2 fs-5">Confirm Booking ✅</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            const selectedSet = new Set();
+            const selectedSeatsInput = document.getElementById('selectedSeatsCsv');
+            const formTravelDate = document.getElementById('formTravelDate');
+            const travelDateInput = document.getElementById('travelDate');
+
+            // Toggle seat selection
+            document.querySelectorAll('.seat.available').forEach(seat => {
+                seat.addEventListener('click', () => {
+                    const n = seat.dataset.seat;
+                    if (selectedSet.has(n)) {
+                        selectedSet.delete(n);
+                        seat.classList.remove('selected');
+                    } else {
+                        selectedSet.add(n);
+                        seat.classList.add('selected');
+                    }
+                    selectedSeatsInput.value = Array.from(selectedSet).sort((a, b) => a - b).join(',');
+                });
+            });
+
+            // Pass travel date on submit
+            document.getElementById('bookingForm').addEventListener('submit', function () {
+                formTravelDate.value = travelDateInput.value;
+            });
+
+            // Reload seat map when date changes
+            travelDateInput.addEventListener('change', function () {
+                const dt = travelDateInput.value;
+                const params = new URLSearchParams(window.location.search);
+                params.set('scheduleId', '@Model.Id');
+                params.set('travelDate', dt);
+                window.location = `${window.location.pathname}?${params.toString()}`;
+            });
+        })();
+    </script>
+
+    <style>
+        .seat-map { max-width: 700px; margin: 0 auto; text-align: center; }
+        .seat { width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; margin: 6px;
+                border-radius: 8px; font-weight: 600; cursor: pointer; background: #e9ecef;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+        .seat.booked { background: #cfcfcf; color: #666; cursor: not-allowed; }
+        .seat.available:hover { background: #b3e5fc; }
+        .seat.selected { background: #007bff; color: #fff; }
+    </style>
+}

@@ -109,22 +109,21 @@ https://localhost:5001
 
 
 BusBookingWebApp/
-├── Controllers/         # MVC Controllers
-├── Models/              # Data models (Bus, Booking, User, etc.)
-├── Views/               # Razor Views (.cshtml files)
-├── Data/                # Database context & migrations
-├── Migrations/          # EF Core migration files
-├── wwwroot/             # Static files (CSS, JS, images)
-├── appsettings.json     # Configuration file
-├── Program.cs           # Application entry point
-└── busapp.db            # SQLite database file
+├── Controllers/                  # MVC Controllers
+├── Models/                       # Data models (Bus, Booking, User, etc.)
+├── Views/                       # Razor Views (.cshtml files)
+├── Data/                        # Database context & migrations
+├── Migrations/                   # EF Core migration files
+├── wwwroot/                      # Static files (CSS, JS, images)
+├── appsettings.json              # Configuration file
+├── Program.cs                    # Application entry point
+└── busapp.db                     # SQLite database file
 
 
-For demo purposes, you may add default users via the database or EF seeding.
 
----
 
-## 🧩 Key Models
+
+🧩 Key Models
 
 | Model       | Description                                         |
 | ----------- | --------------------------------------------------- |

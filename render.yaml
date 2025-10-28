@@ -3,5 +3,5 @@ services:
     name: BusBookingWebApp
     env: dotnet
     plan: free
-    buildCommand: dotnet restore && dotnet publish -c Release -o out
-    startCommand: dotnet out/BusBookingWebApp.dll
+    buildCommand: yarn
+    startCommand: start

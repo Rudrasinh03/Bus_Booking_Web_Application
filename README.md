@@ -1,3 +1,7 @@
+**NAME:THAKOR RUDRASINH PRAGNESHSINH
+CLASS/DIV: 5-D
+EN.NO:202303103510355**
+
 Bus Booking Web Application
 
 Description
@@ -17,3 +21,4 @@ Technologies Used
 - Entity Framework Core
 - SQLite Database(busapp.db)
 - Bootstrap 5 for UI
+
